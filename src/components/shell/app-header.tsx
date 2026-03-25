@@ -20,7 +20,7 @@ export function AppHeader({ title, description }: AppHeaderProps) {
       </div>
 
       <div className="rounded-full border border-neutral-200 bg-white p-1 shadow-sm">
-        <UserButton afterSignOutUrl="/sign-in" />
+        <UserButton />
       </div>
     </header>
   );

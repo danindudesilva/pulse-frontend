@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 
 export default function MarketingPage() {
   return (
@@ -10,18 +11,29 @@ export default function MarketingPage() {
           </Link>
 
           <div className="flex items-center gap-3">
-            <Link
-              href="/sign-in"
-              className="text-sm font-medium text-neutral-600 transition hover:text-neutral-950"
-            >
-              Sign in
-            </Link>
-            <Link
-              href="/sign-up"
-              className="rounded-full bg-neutral-950 px-4 py-2 text-sm font-medium text-white transition hover:bg-neutral-800"
-            >
-              Start free
-            </Link>
+            <SignedOut>
+              <Link
+                href="/sign-in"
+                className="text-sm font-medium text-neutral-600 transition hover:text-neutral-950"
+              >
+                Sign in
+              </Link>
+              <Link
+                href="/sign-up"
+                className="rounded-full bg-neutral-950 px-4 py-2 text-sm font-medium text-white transition hover:bg-neutral-800"
+              >
+                Start free
+              </Link>
+            </SignedOut>
+
+            <SignedIn>
+              <Link
+                href="/app"
+                className="rounded-full bg-neutral-950 px-4 py-2 text-sm font-medium text-white transition hover:bg-neutral-800"
+              >
+                Open app
+              </Link>
+            </SignedIn>
           </div>
         </header>
 
@@ -42,18 +54,29 @@ export default function MarketingPage() {
             </p>
 
             <div className="mt-10 flex items-center gap-4">
-              <Link
-                href="/sign-up"
-                className="rounded-full bg-neutral-950 px-5 py-3 text-sm font-medium text-white transition hover:bg-neutral-800"
-              >
-                Start free
-              </Link>
-              <Link
-                href="/sign-in"
-                className="rounded-full border border-neutral-200 bg-white px-5 py-3 text-sm font-medium text-neutral-900 transition hover:bg-neutral-50"
-              >
-                Sign in
-              </Link>
+              <SignedOut>
+                <Link
+                  href="/sign-up"
+                  className="rounded-full bg-neutral-950 px-5 py-3 text-sm font-medium text-white transition hover:bg-neutral-800"
+                >
+                  Start free
+                </Link>
+                <Link
+                  href="/sign-in"
+                  className="rounded-full border border-neutral-200 bg-white px-5 py-3 text-sm font-medium text-neutral-900 transition hover:bg-neutral-50"
+                >
+                  Sign in
+                </Link>
+              </SignedOut>
+
+              <SignedIn>
+                <Link
+                  href="/app"
+                  className="rounded-full bg-neutral-950 px-5 py-3 text-sm font-medium text-white transition hover:bg-neutral-800"
+                >
+                  Open dashboard
+                </Link>
+              </SignedIn>
             </div>
           </div>
         </section>
