@@ -24,12 +24,19 @@ export function SidebarNav() {
             className={cn(
               "flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium transition",
               isActive
-                ? "bg-neutral-950 text-white shadow-sm"
+                ? "bg-neutral-950 text-white hover:bg-neutral-900"
                 : "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-950",
             )}
           >
-            <Icon className="h-4 w-4" />
-            <span>{item.title}</span>
+            <Icon
+              className={cn(
+                "h-4 w-4",
+                isActive ? "text-white" : "text-current",
+              )}
+            />
+            <span className={cn(isActive ? "text-white" : "text-current")}>
+              {item.title}
+            </span>
           </Link>
         );
       })}

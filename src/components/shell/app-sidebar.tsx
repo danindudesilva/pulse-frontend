@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { AppLogo } from "@/components/shell/app-logo";
 import { SidebarNav } from "@/components/shell/sidebar-nav";
 
@@ -11,15 +10,6 @@ export function AppSidebar() {
 
       <div className="flex flex-1 flex-col px-4 py-6">
         <SidebarNav />
-
-        <div className="mt-6">
-          <Link
-            href="/app/opportunities"
-            className="flex items-center justify-center rounded-2xl border border-neutral-200 bg-white px-4 py-3 text-sm font-medium text-neutral-900 transition hover:bg-neutral-50"
-          >
-            View opportunities
-          </Link>
-        </div>
 
         <div className="mt-auto rounded-3xl border border-neutral-200 bg-white p-4 shadow-sm">
           <p className="text-sm font-medium text-neutral-900">
