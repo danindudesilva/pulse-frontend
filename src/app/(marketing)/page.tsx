@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { Show } from "@clerk/nextjs";
 
 export default function MarketingPage() {
   return (
@@ -7,11 +7,11 @@ export default function MarketingPage() {
       <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-6 py-8">
         <header className="flex items-center justify-between py-4">
           <Link href="/" className="text-lg font-semibold tracking-tight">
-            QuoteFollow
+            Pulse
           </Link>
 
           <div className="flex items-center gap-3">
-            <SignedOut>
+            <Show when="signed-out">
               <Link
                 href="/sign-in"
                 className="text-sm font-medium text-neutral-600 transition hover:text-neutral-950"
@@ -24,23 +24,23 @@ export default function MarketingPage() {
               >
                 Start free
               </Link>
-            </SignedOut>
+            </Show>
 
-            <SignedIn>
+            <Show when="signed-in">
               <Link
                 href="/app"
                 className="rounded-full bg-neutral-950 px-4 py-2 text-sm font-medium text-white transition hover:bg-neutral-800"
               >
                 Open app
               </Link>
-            </SignedIn>
+            </Show>
           </div>
         </header>
 
         <section className="flex flex-1 items-center py-20">
           <div className="max-w-3xl">
-            <p className="text-sm font-medium tracking-[0.16em] text-neutral-500 uppercase">
-              QuoteFollow
+            <p className="text-sm font-medium uppercase tracking-[0.16em] text-neutral-500">
+              Pulse
             </p>
 
             <h1 className="mt-6 text-5xl font-semibold tracking-tight text-neutral-950 sm:text-6xl">
@@ -54,7 +54,7 @@ export default function MarketingPage() {
             </p>
 
             <div className="mt-10 flex items-center gap-4">
-              <SignedOut>
+              <Show when="signed-out">
                 <Link
                   href="/sign-up"
                   className="rounded-full bg-neutral-950 px-5 py-3 text-sm font-medium text-white transition hover:bg-neutral-800"
@@ -67,16 +67,16 @@ export default function MarketingPage() {
                 >
                   Sign in
                 </Link>
-              </SignedOut>
+              </Show>
 
-              <SignedIn>
+              <Show when="signed-in">
                 <Link
                   href="/app"
                   className="rounded-full bg-neutral-950 px-5 py-3 text-sm font-medium text-white transition hover:bg-neutral-800"
                 >
                   Open dashboard
                 </Link>
-              </SignedIn>
+              </Show>
             </div>
           </div>
         </section>
