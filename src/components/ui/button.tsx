@@ -4,15 +4,28 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 export const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-full text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  [
+    "inline-flex items-center justify-center whitespace-nowrap rounded-full",
+    "text-sm font-medium no-underline transition",
+    "focus-visible:outline-none focus-visible:ring-2",
+    "focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2",
+    "disabled:pointer-events-none disabled:opacity-50",
+  ].join(" "),
   {
     variants: {
       variant: {
-        primary:
-          "bg-neutral-950 text-white hover:bg-neutral-800 [&_svg]:text-white",
-        secondary:
-          "border border-neutral-200 bg-white text-neutral-900 hover:bg-neutral-50",
-        ghost: "text-neutral-700 hover:bg-neutral-100 hover:text-neutral-950",
+        primary: [
+          "bg-neutral-950 hover:bg-neutral-800",
+          "!text-white hover:!text-white visited:!text-white",
+        ].join(" "),
+        secondary: [
+          "border border-neutral-200 bg-white hover:bg-neutral-50",
+          "!text-neutral-900 hover:!text-neutral-900 visited:!text-neutral-900",
+        ].join(" "),
+        ghost: [
+          "hover:bg-neutral-100",
+          "!text-neutral-700 hover:!text-neutral-950 visited:!text-neutral-700",
+        ].join(" "),
       },
       size: {
         sm: "px-4 py-2",
