@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AppHeader } from "@/components/shell/app-header";
+import { Button } from "@/components/ui/button";
 
 const summaryCards = [
   { label: "Due today", value: "0" },
@@ -43,12 +44,9 @@ export default function DashboardPage() {
                 </p>
               </div>
 
-              <Link
-                href="/app/opportunities"
-                className="rounded-full border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 transition hover:bg-neutral-50"
-              >
-                View all
-              </Link>
+              <Button asChild variant="secondary" size="sm">
+                <Link href="/app/opportunities">View all</Link>
+              </Button>
             </div>
 
             <div className="mt-10 rounded-2xl border border-dashed border-neutral-200 px-6 py-12 text-center">
@@ -72,12 +70,9 @@ export default function DashboardPage() {
             </p>
 
             <div className="mt-6">
-              <Link
-                href="/app/opportunities"
-                className="inline-flex rounded-full bg-neutral-950 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-neutral-800"
-              >
-                Open opportunities
-              </Link>
+              <Button asChild variant="primary" size="md">
+                <Link href="/app/opportunities">Open opportunities</Link>
+              </Button>
             </div>
           </section>
         </div>

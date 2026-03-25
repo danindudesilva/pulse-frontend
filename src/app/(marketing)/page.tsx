@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Show } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
 
 export default function MarketingPage() {
   return (
@@ -18,21 +19,16 @@ export default function MarketingPage() {
               >
                 Sign in
               </Link>
-              <Link
-                href="/sign-up"
-                className="rounded-full bg-neutral-950 px-4 py-2 text-sm font-medium text-white transition hover:bg-neutral-800"
-              >
-                Start free
-              </Link>
+
+              <Button asChild variant="primary" size="sm">
+                <Link href="/sign-up">Start free</Link>
+              </Button>
             </Show>
 
             <Show when="signed-in">
-              <Link
-                href="/app"
-                className="rounded-full bg-neutral-950 px-4 py-2 text-sm font-medium text-white transition hover:bg-neutral-800"
-              >
-                Open app
-              </Link>
+              <Button asChild variant="primary" size="sm">
+                <Link href="/app">Open app</Link>
+              </Button>
             </Show>
           </div>
         </header>
@@ -55,27 +51,19 @@ export default function MarketingPage() {
 
             <div className="mt-10 flex items-center gap-4">
               <Show when="signed-out">
-                <Link
-                  href="/sign-up"
-                  className="rounded-full bg-neutral-950 px-5 py-3 text-sm font-medium text-white transition hover:bg-neutral-800"
-                >
-                  Start free
-                </Link>
-                <Link
-                  href="/sign-in"
-                  className="rounded-full border border-neutral-200 bg-white px-5 py-3 text-sm font-medium text-neutral-900 transition hover:bg-neutral-50"
-                >
-                  Sign in
-                </Link>
+                <Button asChild variant="primary" size="lg">
+                  <Link href="/sign-up">Start free</Link>
+                </Button>
+
+                <Button asChild variant="secondary" size="lg">
+                  <Link href="/sign-in">Sign in</Link>
+                </Button>
               </Show>
 
               <Show when="signed-in">
-                <Link
-                  href="/app"
-                  className="rounded-full bg-neutral-950 px-5 py-3 text-sm font-medium text-white transition hover:bg-neutral-800"
-                >
-                  Open dashboard
-                </Link>
+                <Button asChild variant="primary" size="lg">
+                  <Link href="/app">Open dashboard</Link>
+                </Button>
               </Show>
             </div>
           </div>

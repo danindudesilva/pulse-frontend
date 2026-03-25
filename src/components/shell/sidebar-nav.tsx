@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { appNavigation } from "@/config/navigation";
 import { cn } from "@/lib/utils";
+import { navItemVariants } from "@/components/shell/nav-item-variants";
 
 export function SidebarNav() {
   const pathname = usePathname();
@@ -21,12 +22,7 @@ export function SidebarNav() {
           <Link
             key={item.href}
             href={item.href}
-            className={cn(
-              "flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium transition",
-              isActive
-                ? "bg-neutral-950 text-white hover:bg-neutral-900"
-                : "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-950",
-            )}
+            className={cn(navItemVariants({ active: isActive }))}
           >
             <Icon
               className={cn(
