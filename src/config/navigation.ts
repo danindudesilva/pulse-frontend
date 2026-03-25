@@ -10,12 +10,12 @@ export type AppNavItem = {
 export const appNavigation: AppNavItem[] = [
   {
     title: "Dashboard",
-    href: "/",
+    href: "/app",
     icon: LayoutDashboard,
   },
   {
     title: "Opportunities",
-    href: "/opportunities",
+    href: "/app/opportunities",
     icon: BriefcaseBusiness,
   },
 ];
