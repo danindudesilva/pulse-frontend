@@ -67,7 +67,7 @@ export default function DashboardPage() {
               Start clean
             </h2>
             <p className="mt-2 text-sm leading-6 text-neutral-600">
-              Keep QuoteFollow focused: track active quotes, follow up on time,
+              Keep Pulse focused: track active quotes, follow up on time,
               and avoid turning it into a cluttered CRM.
             </p>
 

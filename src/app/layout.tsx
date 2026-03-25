@@ -9,7 +9,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "QuoteFollow",
+  title: "Pulse",
   description:
     "Track quotes, stay on top of follow-ups, and keep client work moving.",
 };
