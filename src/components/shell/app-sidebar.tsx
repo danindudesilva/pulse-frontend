@@ -14,7 +14,7 @@ export function AppSidebar() {
 
         <div className="mt-6">
           <Link
-            href="/opportunities"
+            href="/app/opportunities"
             className="flex items-center justify-center rounded-2xl border border-neutral-200 bg-white px-4 py-3 text-sm font-medium text-neutral-900 transition hover:bg-neutral-50"
           >
             View opportunities

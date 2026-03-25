@@ -44,7 +44,7 @@ export default function DashboardPage() {
               </div>
 
               <Link
-                href="/opportunities"
+                href="/app/opportunities"
                 className="rounded-full border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-900 transition hover:bg-neutral-50"
               >
                 View all
@@ -73,7 +73,7 @@ export default function DashboardPage() {
 
             <div className="mt-6">
               <Link
-                href="/opportunities"
+                href="/app/opportunities"
                 className="inline-flex rounded-full bg-neutral-950 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-neutral-800"
               >
                 Open opportunities

@@ -13,7 +13,7 @@ export function SidebarNav() {
       {appNavigation.map((item) => {
         const Icon = item.icon;
         const isActive =
-          item.href === "/"
+          item.href === "/app"
             ? pathname === item.href
             : pathname.startsWith(item.href);
 

@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { LayoutDashboard, BriefcaseBusiness } from "lucide-react";
+import { BriefcaseBusiness, LayoutDashboard } from "lucide-react";
 
 export type AppNavItem = {
   title: string;
