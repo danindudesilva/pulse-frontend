@@ -47,6 +47,12 @@ export default async function ProtectedAppLayout({
         body: error.body,
       });
 
+      if (error.status === 0) {
+        return (
+          <BootstrapFailureState message="Pulse couldn’t reach the backend service while initializing your account. Please try again once the backend is available." />
+        );
+      }
+
       const details =
         typeof error.body === "string"
           ? error.body

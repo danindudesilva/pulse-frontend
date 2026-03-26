@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useTransition } from "react";
 import { Button } from "@/components/ui/button";
 
 type BootstrapFailureStateProps = {
@@ -8,6 +12,15 @@ type BootstrapFailureStateProps = {
 export function BootstrapFailureState({
   message = "We couldn’t initialize your account in Pulse. Please try again or sign out and back in.",
 }: BootstrapFailureStateProps) {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+
+  function handleRetry() {
+    startTransition(() => {
+      router.refresh();
+    });
+  }
+
   return (
     <main className="flex min-h-screen items-center justify-center bg-[var(--background)] px-6 py-12">
       <div className="w-full max-w-xl rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-8 shadow-sm">
@@ -26,8 +39,13 @@ export function BootstrapFailureState({
             <Link href="/">Back to home</Link>
           </Button>
 
-          <Button asChild variant="primary" size="md">
-            <Link href="/app">Try again</Link>
+          <Button
+            onClick={handleRetry}
+            variant="primary"
+            size="md"
+            disabled={isPending}
+          >
+            {isPending ? "Retrying..." : "Try again"}
           </Button>
         </div>
       </div>
