@@ -21,8 +21,8 @@ export function OpportunitiesFilters({
   activeStatus,
 }: OpportunitiesFiltersProps) {
   return (
-    <div className="space-y-3">
-      <div className="flex flex-wrap gap-2">
+    <div className="space-y-4">
+      <div className="flex flex-wrap gap-3">
         {opportunityViewOptions.map((option) => {
           const isActive = option.value === activeView;
 
@@ -46,7 +46,7 @@ export function OpportunitiesFilters({
         })}
       </div>
 
-      <div className="flex flex-wrap gap-2 pt-1">
+      <div className="flex flex-wrap gap-3">
         <Link
           href={buildOpportunitiesHref({
             view: activeView,

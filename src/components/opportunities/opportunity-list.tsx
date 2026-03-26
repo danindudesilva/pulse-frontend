@@ -7,7 +7,7 @@ type OpportunityListProps = {
 
 export function OpportunityList({ opportunities }: OpportunityListProps) {
   return (
-    <div className="space-y-5">
+    <div className="grid gap-5">
       {opportunities.map((opportunity) => (
         <OpportunityListItem key={opportunity.id} opportunity={opportunity} />
       ))}
