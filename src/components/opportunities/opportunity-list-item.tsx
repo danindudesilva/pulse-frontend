@@ -11,16 +11,16 @@ export function OpportunityListItem({
 }: OpportunityListItemProps) {
   return (
     <article className="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
-      <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
+      <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
         <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2.5">
             <h3 className="text-base font-semibold tracking-tight text-neutral-950">
               {opportunity.title}
             </h3>
             <OpportunityStatusBadge status={opportunity.status} />
           </div>
 
-          <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-neutral-600">
+          <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-neutral-600">
             <span>{opportunity.companyName ?? "No company"}</span>
             {opportunity.contactName ? (
               <span>Contact: {opportunity.contactName}</span>
@@ -30,25 +30,30 @@ export function OpportunityListItem({
             ) : null}
           </div>
 
-          <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-neutral-500">
-            {opportunity.quoteSentAt ? (
-              <span>Quote sent: {formatDateTime(opportunity.quoteSentAt)}</span>
-            ) : (
-              <span>Quote not sent yet</span>
-            )}
+          <div className="mt-4 grid gap-2 text-sm text-neutral-500 sm:grid-cols-2 xl:grid-cols-3">
+            <div>
+              <span className="font-medium text-neutral-700">Quote sent:</span>{" "}
+              {opportunity.quoteSentAt
+                ? formatDateTime(opportunity.quoteSentAt)
+                : "Not sent yet"}
+            </div>
 
-            {opportunity.nextFollowUpAt ? (
-              <span>
-                Next follow-up: {formatDateTime(opportunity.nextFollowUpAt)}
-              </span>
-            ) : null}
+            <div>
+              <span className="font-medium text-neutral-700">Next follow-up:</span>{" "}
+              {opportunity.nextFollowUpAt
+                ? formatDateTime(opportunity.nextFollowUpAt)
+                : "—"}
+            </div>
 
-            <span>Updated: {formatDateTime(opportunity.updatedAt)}</span>
+            <div>
+              <span className="font-medium text-neutral-700">Updated:</span>{" "}
+              {formatDateTime(opportunity.updatedAt)}
+            </div>
           </div>
         </div>
 
-        <div className="shrink-0">
-          <p className="text-right text-lg font-semibold tracking-tight text-neutral-950">
+        <div className="shrink-0 xl:pl-6">
+          <p className="text-left text-lg font-semibold tracking-tight text-neutral-950 xl:text-right">
             {formatCurrency(opportunity.valueAmount, opportunity.currency)}
           </p>
         </div>
