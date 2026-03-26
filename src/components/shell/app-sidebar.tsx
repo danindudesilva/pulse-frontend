@@ -4,7 +4,7 @@ import { SidebarNav } from "@/components/shell/sidebar-nav";
 export function AppSidebar() {
   return (
     <aside className="hidden w-72 shrink-0 border-r border-[var(--border)] bg-[var(--surface)] lg:flex lg:flex-col">
-      <div className="border-b border-[var(--border)] px-6 py-5">
+      <div className="flex min-h-28 items-center border-b border-[var(--border)] px-6 py-6">
         <AppLogo />
       </div>
 
