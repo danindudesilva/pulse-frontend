@@ -49,17 +49,21 @@ export default async function OpportunitiesPage({
                 </p>
               </div>
 
-              <OpportunitiesFilters
-                activeView={params.view ?? "all"}
-                activeStatus={params.status}
-              />
+              <div className="w-full min-w-0 xl:max-w-[42rem]">
+                <OpportunitiesFilters
+                  activeView={params.view ?? "all"}
+                  activeStatus={params.status}
+                />
+              </div>
+            </div>
+            <div className="max-w-4xl">
+              {opportunities.length === 0 ? (
+                <OpportunitiesEmptyState hasFilters={hasFilters} />
+              ) : (
+                <OpportunityList opportunities={opportunities} />
+              )}
             </div>
           </div>
-            {opportunities.length === 0 ? (
-              <OpportunitiesEmptyState hasFilters={hasFilters} />
-            ) : (
-              <OpportunityList opportunities={opportunities} />
-            )}
         </section>
       </main>
     </>

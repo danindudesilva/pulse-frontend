@@ -23,7 +23,7 @@ export function OpportunitiesFilters({
   return (
     <div className="w-full space-y-3">
       <div className="-mx-1 overflow-x-auto pb-1">
-        <div className="flex min-w-max gap-2 px-1 py-1">
+        <div className="flex flex-wrap gap-3 px-1">
           {opportunityViewOptions.map((option) => {
             const isActive = option.value === activeView;
 
@@ -49,8 +49,8 @@ export function OpportunitiesFilters({
         </div>
       </div>
 
-      <div className="-mx-1 overflow-x-auto pb-1 py-2">
-        <div className="flex min-w-max gap-2 px-1">
+      <div className="w-full min-w-0 pt-1 py-2">
+        <div className="flex w-full min-w-0 max-w-full flex-wrap gap-3 px-1">
           <Link
             href={buildOpportunitiesHref({
               view: activeView,
