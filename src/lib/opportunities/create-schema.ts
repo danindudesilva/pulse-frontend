@@ -45,7 +45,7 @@ export const createOpportunityFormSchema = z
       ),
     currency: z.string().trim(),
     notes: optionalTrimmedString,
-    status: z.enum(["draft", "sent", "replied", "won", "lost", "paused"]),
+    status: z.enum(["draft", "sent"]),
     quoteSentAt: z.string().trim().optional(),
   })
   .superRefine((data, ctx) => {
