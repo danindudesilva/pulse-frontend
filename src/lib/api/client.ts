@@ -25,16 +25,26 @@ export async function apiRequest<T>(
 ): Promise<T> {
   const { method = "GET", headers, body, token } = options;
 
-  const response = await fetch(`${env.apiBaseUrl}${path}`, {
-    method,
-    headers: {
-      "Content-Type": "application/json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      ...headers,
-    },
-    body: body !== undefined ? JSON.stringify(body) : undefined,
-    cache: "no-store",
-  });
+  let response: Response;
+
+  try {
+    response = await fetch(`${env.apiBaseUrl}${path}`, {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...headers,
+      },
+      body: body !== undefined ? JSON.stringify(body) : undefined,
+      cache: "no-store",
+    });
+  } catch (error) {
+    throw new ApiError(
+      `Network request failed: ${method} ${path}`,
+      0,
+      error instanceof Error ? error.message : "Unknown network error"
+    );
+  }
 
   const parsedBody = await parseResponse(response);
 
