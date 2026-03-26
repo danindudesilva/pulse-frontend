@@ -38,8 +38,8 @@ export default async function OpportunitiesPage({
 
       <main className="flex-1 px-6 py-6">
         <section className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm">
-        <div className="flex flex-col gap-8">
-        <div className="flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between xl:gap-8">
+          <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between xl:gap-8">
               <div>
                 <h2 className="text-lg font-semibold tracking-tight text-neutral-950">
                   All opportunities
@@ -49,20 +49,17 @@ export default async function OpportunitiesPage({
                 </p>
               </div>
 
-              <div className="min-w-0 xl:max-w-[42rem]">
-                <OpportunitiesFilters
-                  activeView={params.view ?? "all"}
-                  activeStatus={params.status}
-                />
-              </div>
+              <OpportunitiesFilters
+                activeView={params.view ?? "all"}
+                activeStatus={params.status}
+              />
             </div>
-
+          </div>
             {opportunities.length === 0 ? (
               <OpportunitiesEmptyState hasFilters={hasFilters} />
             ) : (
               <OpportunityList opportunities={opportunities} />
             )}
-          </div>
         </section>
       </main>
     </>

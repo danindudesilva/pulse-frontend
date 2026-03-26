@@ -7,7 +7,7 @@ type AppHeaderProps = {
 
 export function AppHeader({ title, description }: AppHeaderProps) {
   return (
-    <header className="flex min-h-28 items-start justify-between gap-4 border-b border-[var(--border)] bg-[var(--surface)] px-6 py-5">
+    <header className="flex min-h-28 items-start justify-between gap-4 border-b border-[var(--border)] bg-[var(--surface)] px-6 py-3">
       <div>
         <h1 className="text-2xl font-semibold tracking-tight text-neutral-950">
           {title}

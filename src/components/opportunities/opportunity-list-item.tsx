@@ -17,48 +17,47 @@ export function OpportunityListItem({
             <h3 className="text-base font-semibold tracking-tight text-neutral-950">
               {opportunity.title}
             </h3>
-            <OpportunityStatusBadge status={opportunity.status} />
+            <div className="space-x-3 space-y-5">
+              <OpportunityStatusBadge status={opportunity.status} />
+            </div>
           </div>
 
-          <div className="mt-4 space-y-2 text-sm text-neutral-600">
+          <div className="mt-4 space-y-2 text-sm text-neutral-600 py-1">
             <div>
               <span className="font-medium text-neutral-700">Company:</span>{" "}
               {opportunity.companyName ?? "No company"}
             </div>
-
-            {(opportunity.contactName || opportunity.contactEmail) && (
-              <div>
-                <span className="font-medium text-neutral-700">Contact:</span>{" "}
-                {opportunity.contactName ?? "Unknown"}
-                {opportunity.contactEmail ? ` · ${opportunity.contactEmail}` : ""}
-              </div>
-            )}
+              {(opportunity.contactName || opportunity.contactEmail) && (
+                <div>
+                  <span className="font-medium text-neutral-700">Contact:</span>{" "}
+                  {opportunity.contactName ?? "Unknown"}
+                  {opportunity.contactEmail ? ` · ${opportunity.contactEmail}` : ""}
+                </div>
+              )}
           </div>
 
           <div className="mt-5 grid gap-3 text-sm sm:grid-cols-2 xl:grid-cols-3">
-            <div className="rounded-xl bg-neutral-50 px-3 py-2.5">
-              <p className="text-xs font-medium text-neutral-500">Quote sent</p>
-              <p className="mt-1 text-sm leading-5 text-neutral-700">
+            <div className="rounded-xl bg-neutral-50 px-3">
+              <p className="text-sm leading-5 text-neutral-700">
+                <span className="font-medium text-neutral-600">Quote sent:</span>{" "}
                 {opportunity.quoteSentAt
                   ? formatDateTime(opportunity.quoteSentAt)
                   : "Not sent yet"}
               </p>
             </div>
 
-            <div className="rounded-xl bg-neutral-50 px-3 py-2.5">
-              <p className="text-xs font-medium text-neutral-500">
-                Next follow-up
-              </p>
-              <p className="mt-1 text-sm leading-5 text-neutral-700">
+            <div className="rounded-xl bg-neutral-50 px-3">
+              <p className="text-sm leading-5 text-neutral-700">
+                <span className="font-medium text-neutral-600">Next follow-up:</span>{" "}
                 {opportunity.nextFollowUpAt
                   ? formatDateTime(opportunity.nextFollowUpAt)
                   : "—"}
               </p>
             </div>
 
-            <div className="rounded-xl bg-neutral-50 px-3 py-2.5">
-              <p className="text-xs font-medium text-neutral-500">Last updated</p>
-              <p className="mt-1 text-sm leading-5 text-neutral-700">
+            <div className="rounded-xl bg-neutral-50 px-3">
+              <p className="text-sm leading-5 text-neutral-700">
+                <span className="font-medium text-neutral-600">Last updated:</span>{" "}
                 {formatDateTime(opportunity.updatedAt)}
               </p>
             </div>
