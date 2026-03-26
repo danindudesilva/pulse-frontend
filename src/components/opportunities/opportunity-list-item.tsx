@@ -35,36 +35,32 @@ export function OpportunityListItem({
             )}
           </div>
 
-          <div className="mt-5 grid gap-3 text-sm text-neutral-500 sm:grid-cols-2 xl:grid-cols-3">
-            <div className="rounded-xl bg-neutral-50 px-3 py-2">
-              <span className="block text-xs font-medium uppercase tracking-wide text-neutral-500">
-                Quote sent
-              </span>
-              <span className="mt-1 block text-sm text-neutral-700">
+          <div className="mt-5 grid gap-3 text-sm sm:grid-cols-2 xl:grid-cols-3">
+            <div className="rounded-xl bg-neutral-50 px-3 py-2.5">
+              <p className="text-xs font-medium text-neutral-500">Quote sent</p>
+              <p className="mt-1 text-sm leading-5 text-neutral-700">
                 {opportunity.quoteSentAt
                   ? formatDateTime(opportunity.quoteSentAt)
                   : "Not sent yet"}
-              </span>
+              </p>
             </div>
 
-            <div className="rounded-xl bg-neutral-50 px-3 py-2">
-              <span className="block text-xs font-medium uppercase tracking-wide text-neutral-500">
+            <div className="rounded-xl bg-neutral-50 px-3 py-2.5">
+              <p className="text-xs font-medium text-neutral-500">
                 Next follow-up
-              </span>
-              <span className="mt-1 block text-sm text-neutral-700">
+              </p>
+              <p className="mt-1 text-sm leading-5 text-neutral-700">
                 {opportunity.nextFollowUpAt
                   ? formatDateTime(opportunity.nextFollowUpAt)
                   : "—"}
-              </span>
+              </p>
             </div>
 
-            <div className="rounded-xl bg-neutral-50 px-3 py-2">
-              <span className="block text-xs font-medium uppercase tracking-wide text-neutral-500">
-                Last updated
-              </span>
-              <span className="mt-1 block text-sm text-neutral-700">
+            <div className="rounded-xl bg-neutral-50 px-3 py-2.5">
+              <p className="text-xs font-medium text-neutral-500">Last updated</p>
+              <p className="mt-1 text-sm leading-5 text-neutral-700">
                 {formatDateTime(opportunity.updatedAt)}
-              </span>
+              </p>
             </div>
           </div>
         </div>
