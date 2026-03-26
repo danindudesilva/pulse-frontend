@@ -1,5 +1,7 @@
 "use client";
 
+import { useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
 export default function DashboardError({
@@ -9,7 +11,17 @@ export default function DashboardError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+
   console.error("Dashboard route error", error);
+
+  function handleRetry() {
+    startTransition(() => {
+      router.refresh();
+      reset();
+    });
+  }
 
   return (
     <main className="flex-1 px-6 py-6">
@@ -27,8 +39,13 @@ export default function DashboardError({
         </p>
 
         <div className="mt-6">
-          <Button onClick={reset} variant="primary" size="md">
-            Try again
+          <Button
+            onClick={handleRetry}
+            variant="primary"
+            size="md"
+            disabled={isPending}
+          >
+            {isPending ? "Retrying..." : "Try again"}
           </Button>
         </div>
       </section>
