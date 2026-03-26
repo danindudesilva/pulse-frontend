@@ -10,12 +10,10 @@ import {
 const initialState: CreateOpportunityActionState = {};
 
 export function CreateOpportunityFormShell() {
-  const [state, formAction, isPending] = useActionState(
+  const [state, formAction] = useActionState(
     createOpportunityAction,
     initialState,
   );
 
-  return (
-    <OpportunityForm action={formAction} state={state} isPending={isPending} />
-  );
+  return <OpportunityForm onSubmitAction={formAction} state={state} />;
 }
