@@ -12,7 +12,10 @@ export function AppMobileNav() {
   return (
     <div className="border-b border-[var(--border)] bg-[var(--surface)] px-4 py-4 lg:hidden">
       <div className="flex items-center justify-between gap-4">
-        <Link href="/app" className="text-base font-semibold tracking-tight text-neutral-950">
+        <Link
+          href="/app"
+          className="text-base font-semibold tracking-tight text-neutral-950"
+        >
           Pulse
         </Link>
 
@@ -21,7 +24,7 @@ export function AppMobileNav() {
         </div>
       </div>
 
-      <nav className="mt-4 flex flex-wrap gap-2">
+      <nav className="mt-4 flex gap-2 overflow-x-auto pb-1">
         {appNavigation.map((item) => {
           const isActive =
             item.href === "/app"
@@ -33,7 +36,7 @@ export function AppMobileNav() {
               key={item.href}
               href={item.href}
               className={cn(
-                "rounded-full px-4 py-2 text-sm font-medium transition",
+                "whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition",
                 isActive
                   ? "bg-neutral-950 text-white"
                   : "border border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50",
