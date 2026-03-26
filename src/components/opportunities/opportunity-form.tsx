@@ -257,7 +257,8 @@ export function OpportunityForm({
             </label>
             <input
               id="quoteSentAt"
-              type="datetime-local"
+              type="date"
+              max={new Date().toISOString().split("T")[0]}
               {...register("quoteSentAt")}
               aria-invalid={hasFieldError(
                 errors.quoteSentAt?.message,

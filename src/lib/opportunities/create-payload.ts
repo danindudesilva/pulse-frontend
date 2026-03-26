@@ -12,6 +12,11 @@ export type CreateOpportunityPayload = {
   quoteSentAt?: string;
 };
 
+function toIsoDateTimeFromDateInput(value: string): string {
+  // Use noon UTC to avoid awkward timezone shifts around midnight.
+  return `${value}T12:00:00.000Z`;
+}
+
 export function toCreateOpportunityPayload(
   values: CreateOpportunityFormInput
 ): CreateOpportunityPayload {
@@ -30,10 +35,12 @@ export function toCreateOpportunityPayload(
     ...(values.valueAmount?.trim()
       ? { valueAmount: values.valueAmount.trim() }
       : {}),
-    ...(values.currency?.trim() ? { currency: values.currency.trim() } : {}),
+    ...(values.currency?.trim()
+      ? { currency: values.currency.trim().toUpperCase() }
+      : {}),
     ...(values.notes?.trim() ? { notes: values.notes.trim() } : {}),
     ...(values.quoteSentAt?.trim()
-      ? { quoteSentAt: values.quoteSentAt.trim() }
+      ? { quoteSentAt: toIsoDateTimeFromDateInput(values.quoteSentAt.trim()) }
       : {}),
   };
 }
