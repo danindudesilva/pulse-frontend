@@ -1,54 +1,81 @@
 import { z } from "zod";
 
-const emptyStringToUndefined = z
+const optionalTrimmedString = z.string().trim();
+const optionalNullableString = z
   .string()
   .trim()
-  .transform((value) => {
-    return value.length === 0 ? undefined : value;
-  });
+  .transform((value) => (value.length === 0 ? null : value));
 
-const emptyStringToNull = z
+const optionalEmailString = z
   .string()
   .trim()
-  .transform((value) => {
-    return value.length === 0 ? null : value;
-  });
+  .refine(
+    (value) => value.length === 0 || z.email().safeParse(value).success,
+    "Enter a valid email address"
+  )
+  .transform((value) => (value.length === 0 ? null : value));
 
-export const createOpportunitySchema = z
+const optionalMoneyString = z
+  .string()
+  .trim()
+  .refine(
+    (value) => value.length === 0 || /^(\d+)(\.\d{1,2})?$/.test(value),
+    "Enter a valid amount"
+  )
+  .transform((value) => (value.length === 0 ? null : value));
+
+export const createOpportunityFormSchema = z
   .object({
     title: z.string().trim().min(1, "Title is required"),
-    companyName: emptyStringToNull,
-    contactName: emptyStringToNull,
+    companyName: optionalTrimmedString,
+    contactName: optionalTrimmedString,
     contactEmail: z
       .string()
       .trim()
-      .transform((value) => (value.length === 0 ? null : value))
-      .refine((value) => value === null || z.email().safeParse(value).success, {
-        message: "Enter a valid email address",
-      }),
+      .refine(
+        (value) => value.length === 0 || z.email().safeParse(value).success,
+        "Enter a valid email address"
+      ),
     valueAmount: z
       .string()
       .trim()
-      .transform((value) => (value.length === 0 ? null : value))
       .refine(
-        (value) => value === null || /^(\d+)(\.\d{1,2})?$/.test(value),
+        (value) => value.length === 0 || /^(\d+)(\.\d{1,2})?$/.test(value),
         "Enter a valid amount"
       ),
-    currency: emptyStringToNull,
-    notes: emptyStringToNull,
+    currency: z.string().trim(),
+    notes: optionalTrimmedString,
     status: z.enum(["draft", "sent", "replied", "won", "lost", "paused"]),
-    quoteSentAt: emptyStringToUndefined,
+    quoteSentAt: z.string().trim().optional(),
   })
   .superRefine((data, ctx) => {
-    if (data.status === "sent" && !data.quoteSentAt) {
+    if (data.status === "sent" && !data.quoteSentAt?.trim()) {
       ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+        code: "custom",
         path: ["quoteSentAt"],
         message: "Quote sent date is required when status is sent",
       });
     }
   });
 
-export type CreateOpportunityFormValues = z.infer<
-  typeof createOpportunitySchema
+export const createOpportunityPayloadSchema =
+  createOpportunityFormSchema.transform((values) => ({
+    title: values.title,
+    companyName: values.companyName.trim() || null,
+    contactName: values.contactName.trim() || null,
+    contactEmail: values.contactEmail.trim() || null,
+    valueAmount: values.valueAmount.trim() || null,
+    currency: values.currency.trim() || null,
+    notes: values.notes.trim() || null,
+    status: values.status,
+    ...(values.quoteSentAt?.trim()
+      ? { quoteSentAt: values.quoteSentAt.trim() }
+      : {}),
+  }));
+
+export type CreateOpportunityFormInput = z.input<
+  typeof createOpportunityFormSchema
+>;
+export type CreateOpportunityPayload = z.output<
+  typeof createOpportunityPayloadSchema
 >;

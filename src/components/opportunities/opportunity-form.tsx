@@ -5,8 +5,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import {
-  createOpportunitySchema,
-  type CreateOpportunityFormValues,
+  createOpportunityFormSchema,
+  type CreateOpportunityFormInput,
 } from "@/lib/opportunities/create-schema";
 import type { CreateOpportunityActionState } from "@/app/(app)/app/opportunities/new/actions";
 
@@ -16,14 +16,14 @@ type OpportunityFormProps = {
   isPending?: boolean;
 };
 
-const defaultValues: CreateOpportunityFormValues = {
+const defaultValues: CreateOpportunityFormInput = {
   title: "",
-  companyName: null,
-  contactName: null,
-  contactEmail: null,
-  valueAmount: null,
+  companyName: "",
+  contactName: "",
+  contactEmail: "",
+  valueAmount: "",
   currency: "GBP",
-  notes: null,
+  notes: "",
   status: "draft",
   quoteSentAt: undefined,
 };
@@ -36,14 +36,24 @@ export function OpportunityForm({
   const {
     register,
     watch,
+    reset,
     formState: { errors },
     setValue,
-  } = useForm<CreateOpportunityFormValues>({
-    resolver: zodResolver(createOpportunitySchema),
+  } = useForm<CreateOpportunityFormInput>({
+    resolver: zodResolver(createOpportunityFormSchema),
     defaultValues,
   });
 
   const status = watch("status");
+
+  useEffect(() => {
+    if (state?.values) {
+      reset({
+        ...defaultValues,
+        ...state.values,
+      });
+    }
+  }, [reset, state?.values]);
 
   useEffect(() => {
     if (status !== "sent") {
@@ -64,7 +74,10 @@ export function OpportunityForm({
             className="w-full rounded-2xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 outline-none transition focus:border-neutral-300"
             placeholder="Website redesign proposal"
           />
-          <FieldError message={errors.title?.message} serverError={state?.fieldErrors?.title?.[0]} />
+          <FieldError
+            message={errors.title?.message}
+            serverError={state?.fieldErrors?.title?.[0]}
+          />
         </div>
 
         <div className="space-y-2">
@@ -116,7 +129,7 @@ export function OpportunityForm({
           />
         </div>
 
-        <div className="grid gap-6 xl:grid-cols-[1fr_10rem] xl:col-span-2">
+        <div className="grid gap-6 xl:col-span-2 xl:grid-cols-[1fr_10rem]">
           <div className="space-y-2">
             <label htmlFor="valueAmount" className="text-sm font-medium text-neutral-900">
               Value
@@ -170,7 +183,10 @@ export function OpportunityForm({
             <option value="lost">Lost</option>
             <option value="paused">Paused</option>
           </select>
-          <FieldError message={errors.status?.message} serverError={state?.fieldErrors?.status?.[0]} />
+          <FieldError
+            message={errors.status?.message}
+            serverError={state?.fieldErrors?.status?.[0]}
+          />
         </div>
 
         {status === "sent" ? (
@@ -202,7 +218,10 @@ export function OpportunityForm({
             className="w-full rounded-2xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 outline-none transition focus:border-neutral-300"
             placeholder="Key details, constraints, or context for this opportunity"
           />
-          <FieldError message={errors.notes?.message} serverError={state?.fieldErrors?.notes?.[0]} />
+          <FieldError
+            message={errors.notes?.message}
+            serverError={state?.fieldErrors?.notes?.[0]}
+          />
         </div>
       </div>
 
