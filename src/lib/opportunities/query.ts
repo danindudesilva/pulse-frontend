@@ -14,7 +14,7 @@ export type OpportunitiesSearchParams = Record<
 >;
 
 export const DEFAULT_OPPORTUNITIES_PAGE = 1;
-export const DEFAULT_OPPORTUNITIES_PAGE_SIZE = 20;
+export const DEFAULT_OPPORTUNITIES_PAGE_SIZE = 5;
 
 function readFirstParam(
   value: string | string[] | undefined
