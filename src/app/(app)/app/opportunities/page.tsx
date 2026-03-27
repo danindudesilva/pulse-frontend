@@ -1,16 +1,16 @@
+import Link from "next/link";
 import { auth } from "@clerk/nextjs/server";
 import { AppHeader } from "@/components/shell/app-header";
+import { Button } from "@/components/ui/button";
 import { OpportunitiesEmptyState } from "@/components/opportunities/opportunities-empty-state";
 import { OpportunitiesFilters } from "@/components/opportunities/opportunities-filters";
 import { OpportunityList } from "@/components/opportunities/opportunity-list";
+import { OpportunitiesPaginationControls } from "@/components/opportunities/opportunities-pagination-controls";
 import { getOpportunities } from "@/lib/api/opportunities";
 import {
   parseOpportunitiesParams,
   type OpportunitiesSearchParams,
 } from "@/lib/opportunities/query";
-
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 
 type OpportunitiesPageProps = {
   searchParams?: Promise<OpportunitiesSearchParams>;
@@ -29,7 +29,10 @@ export default async function OpportunitiesPage({
     throw new Error("Missing Clerk session token for opportunities request.");
   }
 
-  const opportunities = await getOpportunities(token, params);
+  const response = await getOpportunities(token, params);
+  const opportunities = response.items;
+  const pagination = response.pagination;
+
   const hasFilters = (params.view && params.view !== "all") || !!params.status;
 
   return (
@@ -65,11 +68,22 @@ export default async function OpportunitiesPage({
                 </div>
               </div>
             </div>
+
             <div className="max-w-4xl">
               {opportunities.length === 0 ? (
                 <OpportunitiesEmptyState hasFilters={hasFilters} />
               ) : (
-                <OpportunityList opportunities={opportunities} />
+                <div className="space-y-6">
+                  <OpportunityList opportunities={opportunities} />
+                  <OpportunitiesPaginationControls
+                    page={pagination.page}
+                    pageSize={pagination.pageSize}
+                    totalItems={pagination.totalItems}
+                    totalPages={pagination.totalPages}
+                    activeView={params.view ?? "all"}
+                    activeStatus={params.status}
+                  />
+                </div>
               )}
             </div>
           </div>
