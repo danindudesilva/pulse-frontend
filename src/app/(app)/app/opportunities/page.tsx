@@ -9,6 +9,9 @@ import {
   type OpportunitiesSearchParams,
 } from "@/lib/opportunities/query";
 
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+
 type OpportunitiesPageProps = {
   searchParams?: Promise<OpportunitiesSearchParams>;
 };
@@ -49,11 +52,17 @@ export default async function OpportunitiesPage({
                 </p>
               </div>
 
-              <div className="w-full min-w-0 xl:max-w-[42rem]">
-                <OpportunitiesFilters
-                  activeView={params.view ?? "all"}
-                  activeStatus={params.status}
-                />
+              <div className="flex flex-col gap-4 xl:items-end">
+                <Button asChild variant="primary" size="sm">
+                  <Link href="/app/opportunities/new">New opportunity</Link>
+                </Button>
+
+                <div className="w-full min-w-0 xl:max-w-[42rem]">
+                  <OpportunitiesFilters
+                    activeView={params.view ?? "all"}
+                    activeStatus={params.status}
+                  />
+                </div>
               </div>
             </div>
             <div className="max-w-4xl">

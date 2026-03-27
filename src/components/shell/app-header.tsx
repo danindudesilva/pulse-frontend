@@ -19,7 +19,7 @@ export function AppHeader({ title, description }: AppHeaderProps) {
         ) : null}
       </div>
 
-      <div className="hidden rounded-full border border-neutral-200 bg-white p-1 shadow-sm lg:block">
+      <div className="rounded-full border border-neutral-200 bg-white p-1 shadow-sm">
         <UserButton />
       </div>
     </header>
