@@ -35,6 +35,12 @@ export function OpportunitiesEmptyState({
       <p className="mt-2 text-sm text-neutral-600">
         Once you add your first opportunity, it will appear here.
       </p>
+
+      <div className="mt-6">
+        <Button asChild variant="primary" size="md">
+          <Link href="/app/opportunities/new">New opportunity</Link>
+        </Button>
+      </div>
     </div>
   );
 }
