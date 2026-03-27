@@ -13,8 +13,10 @@ export type CreateOpportunityPayload = {
 };
 
 function toIsoDateTimeFromDateInput(value: string): string {
-  // Use noon UTC to avoid awkward timezone shifts around midnight.
-  return `${value}T12:00:00.000Z`;
+  const [year, month, day] = value.split("-").map(Number);
+  const localDate = new Date(year, month - 1, day, 0, 0, 0, 0);
+
+  return localDate.toISOString();
 }
 
 export function toCreateOpportunityPayload(
